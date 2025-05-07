@@ -52,7 +52,7 @@ export default function CSMentor() {
             { role: "system", content: "CS 멘토입니다." },
             {
               role: "user",
-              content: `질문: ${question}\n내 답변: ${input}\n이 답이 맞는지 피드백만 주세요.`,
+              content: `질문: ${question}\n내 답변: ${input}\n이 답이 맞는지 피드백만 주세요`,
             },
           ],
         }),

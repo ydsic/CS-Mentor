@@ -73,15 +73,23 @@ export default function CSMentor() {
   return (
     <div className="flex h-screen">
       {/* 히스토리 구간 */}
-      <aside>
-        <div>
-          <h2>History</h2>
+      <aside className="w-64 p-4 border-r overflow-auto">
+        <div className="flex items-end justify-between font-semibold mb-8">
+          <h2 className="font-bold text-2xl">History</h2>
+          <button
+            onClick={() => setHistory([])}
+            className="text-sm text-red-500 hover:underline cursor-pointer"
+          >
+            Clear All
+          </button>
         </div>
-        <ul>
-          <li>질문 목록1</li>
-        </ul>
-        <ul>
-          <li>질문 목록2</li>
+        <ul className="space-y-2 font-medium">
+          <li className="p-2 hover:bg-gray-100 rounded cursor-pointer">
+            질문 목록1
+          </li>
+          <li className="p-2 hover:bg-gray-100 rounded cursor-pointer">
+            질문 목록2
+          </li>
         </ul>
       </aside>
 
@@ -98,11 +106,16 @@ export default function CSMentor() {
           <h3>{question}</h3>
           <form>
             <input type="text" />
-            <button onClick={handleClick} disabled={loading}>
-              {loading ? "로딩 중..." : "제출하기"}
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full p-2 rounded text-white ${
+                loading ? "bg-gray-500" : "bg-blue-600 hover:bg-blue-700"
+              }`}
+            >
+              {loading ? "로딩 중…" : "제출"}
             </button>
             {error && <p style={{ color: "red" }}>{error}</p>}
-            <p>{result}</p>
           </form>
         </main>
       </div>

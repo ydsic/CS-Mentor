@@ -59,7 +59,7 @@ export default function CSMentor() {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      const msg = data.choices?.[0]?.message?.content || "피드백이 없습니다.";
+      const msg = data.choices?.[0]?.message?.content || "피드백이 없습니다";
       setFeedback(msg);
     } catch (err) {
       console.error(err);

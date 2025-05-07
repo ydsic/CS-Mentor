@@ -1,3 +1,4 @@
+import "./App.css";
 import { useState } from "react";
 
 // ① 지원할 테마 목록 정의
@@ -73,9 +74,9 @@ export default function CSMentor() {
   return (
     <div className="flex h-screen">
       {/* 히스토리 구간 */}
-      <aside className="w-64 p-4 border-r overflow-auto">
+      <aside className="w-64 px-4 py-8 border-r border-[#1e40af] overflow-auto">
         <div className="flex items-end justify-between font-semibold mb-8">
-          <h2 className="font-bold text-2xl">History</h2>
+          <h2 className="font-bold text-2xl text-[#1e40af]">History</h2>
           <button
             onClick={() => setHistory([])}
             className="text-sm text-red-500 hover:underline cursor-pointer"
@@ -83,39 +84,47 @@ export default function CSMentor() {
             Clear All
           </button>
         </div>
-        <ul className="space-y-2 font-medium">
-          <li className="p-2 hover:bg-gray-100 rounded cursor-pointer">
+        <ul className="space-y-2 font-medium text-gray-700">
+          <li className="p-2 hover:text-[#1e40af] hover:bg-blue-50 rounded cursor-pointer">
             질문 목록1
           </li>
-          <li className="p-2 hover:bg-gray-100 rounded cursor-pointer">
+          <li className="p-2 hover:text-[#1e40af] hover:bg-blue-50 rounded cursor-pointer">
             질문 목록2
           </li>
         </ul>
       </aside>
 
-      <div>
+      <div className="px-4 w-[calc(100%-256px)]">
         {/* 컬러 모드 변경 */}
-        <header>
-          <div>
-            <button></button>
-          </div>
-        </header>
+        <div className="fixed top-2 right-2">
+          <button>컬러 모드 변환 버튼</button>
+        </div>
 
-        <main>
-          <h1></h1>
-          <h3>{question}</h3>
-          <form>
-            <input type="text" />
+        <main className="flex flex-col justify-center items-center gap-4 h-full">
+          <h1 className="text-4xl text-[#1e40af] font-bold">CS Mentor</h1>
+          <h3 className="text-xl font-medium">{question}</h3>
+          <form className="flex flex-col gap-3">
+            <input
+              type="text"
+              className="p-3 w-80 rounded-lg border border-[#1e40af]"
+              placeholder="답변을 입력하세요..."
+              onChange={(e) => {
+                setInput(e.target.value);
+                setFeedback("");
+              }}
+              value={input}
+              disabled={loading}
+            />
             <button
               type="submit"
               disabled={loading}
-              className={`w-full p-2 rounded text-white ${
-                loading ? "bg-gray-500" : "bg-blue-600 hover:bg-blue-700"
+              className={`w-80 p-2 rounded-lg text-white font-bold cursor-pointer ${
+                loading ? "bg-gray-500" : "bg-[#1e40af] hover:bg-[#1e30af]"
               }`}
             >
-              {loading ? "로딩 중…" : "제출"}
+              {loading ? "로딩 중…" : "제출하기"}
             </button>
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && <p className="text-red-500">{error}</p>}
           </form>
         </main>
       </div>

@@ -52,14 +52,14 @@ export default function CSMentor() {
             { role: "system", content: "CS 멘토입니다." },
             {
               role: "user",
-              content: `질문: ${question}\n내 답변: ${input}\n이 답이 맞는지 피드백만 주세요.`,
+              content: `질문: ${question}\n내 답변: ${input}\n이 답이 맞는지 피드백만 주세요`,
             },
           ],
         }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      const msg = data.choices?.[0]?.message?.content || "피드백이 없습니다.";
+      const msg = data.choices?.[0]?.message?.content || "피드백이 없습니다";
       setFeedback(msg);
     } catch (err) {
       console.error(err);
@@ -71,104 +71,39 @@ export default function CSMentor() {
   };
 
   return (
-    <div className={`flex h-screen ${themeClasses}`}>
-      {/* ——— 왼쪽 히스토리 사이드바 ——— */}
-      <aside className="w-64 p-4 border-r overflow-auto">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="font-bold">History</h2>
-          <button
-            onClick={() => setHistory([])}
-            className="text-sm text-red-500 hover:underline"
-          >
-            Clear All
-          </button>
+    <div className="flex h-screen">
+      {/* 히스토리 구간 */}
+      <aside>
+        <div>
+          <h2>History</h2>
         </div>
-        <ul className="space-y-2">
-          {history.map((item, i) => (
-            <li
-              key={i}
-              className="p-2 bg-gray-100 rounded cursor-pointer"
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              {item.q.length > 20 ? item.q.slice(0, 20) + "…" : item.q}
-            </li>
-          ))}
+        <ul>
+          <li>질문 목록1</li>
+        </ul>
+        <ul>
+          <li>질문 목록2</li>
         </ul>
       </aside>
 
-      {/* 히스토리 모달 */}
-      {hoveredIndex !== null && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="p-4 rounded shadow-lg bg-white text-gray-800 max-w-sm w-full">
-            <h3 className="font-bold mb-2">질문</h3>
-            <p>{history[hoveredIndex].q}</p>
-            <h3 className="font-bold mt-4 mb-2">답변</h3>
-            <p>{history[hoveredIndex].a}</p>
-          </div>
-        </div>
-      )}
-
-      {/* ——— 메인 콘텐츠 ——— */}
-      <div className="flex-1 flex flex-col">
-        {/* 헤더(테마 버튼) */}
-        <header className="p-4 flex justify-between items-center border-b border-gray-300">
-          <h1 className="text-2xl font-bold">CS Mentor</h1>
-          <div className="flex space-x-2">
-            {THEMES.map((t) => (
-              <button
-                key={t.name}
-                onClick={() => setTheme(t.name)}
-                className={`w-6 h-6 rounded-full border-2 ${
-                  theme === t.name ? "border-black" : "border-gray-300"
-                } hover:ring-2`}
-                style={{ backgroundColor: t.color }}
-                aria-label={`테마 ${t.name}`}
-              />
-            ))}
+      <div>
+        {/* 컬러 모드 변경 */}
+        <header>
+          <div>
+            <button></button>
           </div>
         </header>
 
-        {/* 중앙 퀴즈 영역 */}
-        <main className="flex-1 flex flex-col items-center justify-center p-4">
-          <h1 className="text-2xl font-semibold mb-6 text-center">
-            {question}
-          </h1>
-
-          <form
-            onSubmit={handleSubmit}
-            className="w-full max-w-lg flex flex-col"
-          >
-            <input
-              type="text"
-              className="w-full p-3 border rounded mb-2"
-              placeholder="답변을 입력하세요..."
-              value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
-                setFeedback("");
-              }}
-              disabled={loading}
-            />
-            <button
-              type="submit"
-              disabled={loading}
-              className={`w-full p-2 rounded text-white ${
-                loading ? "bg-gray-500" : "bg-blue-600 hover:bg-blue-700"
-              }`}
-            >
-              {loading ? "로딩 중…" : "제출"}
+        <main>
+          <h1></h1>
+          <h3>{question}</h3>
+          <form>
+            <input type="text" />
+            <button onClick={handleClick} disabled={loading}>
+              {loading ? "로딩 중..." : "제출하기"}
             </button>
+            {error && <p style={{ color: "red" }}>{error}</p>}
+            <p>{result}</p>
           </form>
-
-          {error && <p className="mt-2 text-red-500">{error}</p>}
-
-          {feedback && (
-            <div className="mt-4 w-full max-w-lg p-4 bg-green-50 border-l-4 border-green-400">
-              <strong>피드백:</strong>
-              <p className="mt-2 whitespace-pre-line">{feedback}</p>
-            </div>
-          )}
         </main>
       </div>
     </div>

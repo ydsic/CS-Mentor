@@ -1,12 +1,25 @@
-# React + Vite
+# 🎓 CS Mentor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**CS Mentor**는 프론트엔드 신입 개발자들이 **AI 튜터**와 함께 CS(컴퓨터 과학) 면접 질문을 연습할 수 있는 웹 애플리케이션입니다.  
+랜덤으로 출제된 질문에 답변을 작성하면, ChatGPT가 즉시 **정답 여부 판단** 및 **피드백**을 제공해 줍니다.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 주요 기능
 
-## Expanding the ESLint configuration
+- **랜덤 문제 제공**
+  - 운영체제, 네트워크, 자료구조 등 다양한 CS 영역의 질문 풀에서 무작위 출제
+- **답안 제출 및 채점**
+  - 사용자가 입력한 답변을 AI가 분석하여 정답 여부 판단
+- **상세 피드백 제공**
+  - 틀린 부분에 대한 설명과 보충 학습 자료 추천
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ 설치 및 실행 방법
+
+1. **저장소 클론**
+   ```bash
+   git clone https://github.com/ydsic/may_study_project.git
+   cd may_study_project
+   ```

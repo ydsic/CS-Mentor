@@ -12,7 +12,7 @@ export default function Answer({
     >
       <input
         type="text"
-        className="p-3 w-full rounded-lg border border-[#1e40af]"
+        className="p-3 w-full rounded-lg bg-white border border-[#1e40af]"
         placeholder="답변을 입력하세요..."
         value={input}
         onChange={(e) => {

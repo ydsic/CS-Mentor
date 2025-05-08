@@ -7,14 +7,7 @@ import Answer from "./components/answer";
 import { OpenAIApi } from "./api/openaiApi";
 import Feedback from "./components/feedback";
 import NavBar from "./components/nav";
-
-const THEMES = [
-  { name: "white", classes: "bg-white text-gray-800", color: "#FFFFFF" },
-  { name: "black", classes: "bg-black text-white", color: "#000000" },
-  { name: "skyblue", classes: "bg-sky-200 text-gray-800", color: "#38BDF8" },
-  { name: "rose", classes: "bg-rose-200 text-gray-800", color: "#F43F5E" },
-  { name: "lime", classes: "bg-lime-200 text-gray-800", color: "#A3E635" },
-];
+import { THEMES } from "./data/theme";
 
 export default function CSMentor() {
   const [theme, setTheme] = useState(THEMES[0].name);
@@ -54,7 +47,7 @@ export default function CSMentor() {
   return (
     <div className={`flex h-screen ${themeClasses}`}>
       <aside className="w-64 px-4 py-8 border-r border-[#1e40af] overflow-auto">
-        <div className="flex items-end justify-between font-semibold mb-8">
+        <div className="flex items-end justify-between font-semibold mb-6 pb-2 border-b border-[#1e40af]">
           <h2 className="font-bold text-2xl text-[#1e40af]">History</h2>
           <button
             onClick={() => setHistory([])}
@@ -63,17 +56,15 @@ export default function CSMentor() {
             Clear All
           </button>
         </div>
+        {/* history 기록 위치 */}
       </aside>
-      {/* history 기록 위치 */}
       {/* aside div 위치 */}
 
       <div className="flex-1 px-4 relative">
-        <div className="fixed top-4 right-4 flex space-x-2">
-          {/* 테마 넣는 위치 */}
-          <NavBar />
-        </div>
+        {/* 테마 넣는 위치 */}
+        <NavBar theme={theme} setTheme={setTheme} />
 
-        <main className="flex flex-col justify-center items-center gap-4 h-full mt-8">
+        <main className="flex flex-col justify-center items-center gap-4 h-full">
           <Title />
           <Question question={question} />
           <Answer

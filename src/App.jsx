@@ -18,7 +18,7 @@ const THEMES = [
 
 export default function CSMentor() {
   const [theme, setTheme] = useState(THEMES[0].name);
-  const [question] = useState(questions_list[0]);
+  const [question] = useState(questions_list[2]);
   const [input, setInput] = useState("");
   const [feedback, setFeedback] = useState("");
   const [history, setHistory] = useState([

@@ -85,8 +85,11 @@ export default function CSMentor() {
           />
 
           {/* openai api응답 시 나타나는 부분 */}
-          {error && <p className="text-red-500">{error}</p>}
-          {feedback && <Feedback feedback={feedback} />}
+          {/* 피드백이 표시될 공간을 미리 마련하여 피드백이 표시될 시 UI위치가 달라지는 것을 방지 */}
+          <div className="w-full max-w-[50%] h-[20%]">
+            {feedback && <Feedback feedback={feedback} />}
+            {error && <p className="text-red-500">{error}</p>}
+          </div>
         </main>
       </div>
     </div>

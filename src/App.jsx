@@ -66,7 +66,7 @@ export default function CSMentor() {
           setApiKey={setApiKey}
         />
 
-        <main className="flex flex-col justify-center items-center gap-4 h-[80%]">
+        <main className="flex flex-col justify-center items-center gap-4 h-dvh">
           <Title />
           <Question question={question} />
           <Answer

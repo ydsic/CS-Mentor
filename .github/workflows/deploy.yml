@@ -29,3 +29,8 @@ jobs:
         with:
           personal_token: ${{ secrets.ACTION_TOKEN }}
           publish_dir: ./dist
+
+      - name: Build the project
+        run: npm run build
+        env:
+          VITE_OPENAI_API_KEY: ${{ secrets.VITE_OPENAI_API_KEY }}

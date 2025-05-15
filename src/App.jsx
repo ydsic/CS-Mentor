@@ -60,7 +60,7 @@ export default function CSMentor() {
       <div className="flex-1 px-4 relative">
         <NavBar theme={theme} setTheme={setTheme} />
 
-        <main className="flex flex-col justify-center items-center gap-4 h-full">
+        <main className="flex flex-col justify-center items-center gap-4 h-[80%]">
           <Title />
           <Question question={question} />
           <Answer

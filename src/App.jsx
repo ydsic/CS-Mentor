@@ -11,6 +11,7 @@ import { THEMES } from "./data/theme";
 import History from "./components/sidebar";
 
 export default function CSMentor() {
+  const [apiKey, setApiKey] = useState("");
   const [theme, setTheme] = useState(THEMES[0].name);
   const [questionNum, setQuestionNum] = useState(
     Math.floor(Math.random() * questions_list.length)
@@ -38,7 +39,7 @@ export default function CSMentor() {
     setLoading(true);
     setError("");
     try {
-      const msg = await OpenAIApi(question, input);
+      const msg = await OpenAIApi(question, input, apiKey);
       setFeedback(msg);
     } catch (err) {
       console.error(err);
@@ -58,7 +59,12 @@ export default function CSMentor() {
       <History history={history} setHistory={setHistory} />
 
       <div className="flex-1 px-4 relative">
-        <NavBar theme={theme} setTheme={setTheme} />
+        <NavBar
+          theme={theme}
+          setTheme={setTheme}
+          apiKey={apiKey}
+          setApiKey={setApiKey}
+        />
 
         <main className="flex flex-col justify-center items-center gap-4 h-[80%]">
           <Title />

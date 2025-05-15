@@ -1,8 +1,15 @@
 import { THEMES } from "../../data/theme";
 
-export default function NavBar({ theme, setTheme }) {
+export default function NavBar({ theme, setTheme, apiKey, setApiKey }) {
   return (
     <div className="fixed top-12 right-4 flex space-x-2">
+      <input
+        className="border-1 px-2"
+        value={apiKey}
+        onChange={(e) => setApiKey(e.target.value)}
+        placeholder="API Key 입력"
+      />
+
       {THEMES.map((t) => (
         <button
           key={t.name}

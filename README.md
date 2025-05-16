@@ -28,11 +28,10 @@
   - 사용자가 입력한 답변을 AI가 분석하여 정답 여부 판단
 - **상세 피드백 제공**
   - 틀린 부분에 대한 설명과 보충 학습 자료 추천
-- **다크 모드 지원** 🌙
+- **다크 모드 지원**
   - 사용자 환경에 따라 다크/라이트 모드 전환 가능
-- **답변 히스토리 저장 기능** 📝
+- **답변 히스토리 저장 기능**
   - 이전에 제출한 질문 및 피드백을 기록하여 복습 가능
-- **모바일 반응형 UI 지원** 📱
 
 ---
 
@@ -44,7 +43,7 @@
 | **AI 기능**   | OpenAI GPT-4 API                          |
 | **상태 관리** | useState, useEffect 중심의 로컬 상태 관리 |
 | **스타일**    | Tailwind CSS, 다크 모드 지원              |
-| **배포**      | Vercel or Netlify (예정)                  |
+| **배포**      | Github actions, Github pages              |
 
 ---
 
@@ -99,15 +98,7 @@
    npm install
    ```
 
-3. **환경 변수 설정**
-
-   `.env` 파일을 루트에 생성하고 아래와 같이 OpenAI API 키를 추가합니다.
-
-   ```env
-   VITE_OPENAI_API_KEY=your_api_key_here
-   ```
-
-4. **개발 서버 실행**
+3. **개발 서버 실행**
 
    ```bash
    npm run dev
@@ -123,9 +114,12 @@
 - 🔄 사용자 인증 및 로그인 기능 도입
 - 🔄 히스토리별 성취도 분석 대시보드
 
+## 배포 방식
+
+- Github Actions을 이용하여 main branch에 push를 하면 자동으로 gh-pages branch에 build한 파일이 올라가면서 Github Pages로 배포하는 방식
+
 ---
 
-## 🙌 기여 방법
+## 사용법
 
-피드백, 버그 제보, 기능 제안은 언제든 환영입니다!  
-`Issues` 또는 `Pull Request`로 남겨주세요.
+- 서버리스 프로젝트라 ChatGPT API 키를 올릴 방법이 없어서 input 태그 안에 직접 API 키를 넣는 방식으로만 동작합니다. 사용을 해보고 싶으신 분들께선 ydsic99@gmail.com 으로 메일 주시면 API Key를 보내드리겠습니다.

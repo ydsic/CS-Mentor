@@ -22,7 +22,7 @@ export default function History({ history, setHistory }) {
           {history.map((item, i) => (
             <li
               key={i}
-              className="p-2 bg-gray-100 rounded cursor-pointer relative"
+              className="p-2 bg-gray-100 rounded cursor-pointer relative text-black"
               onMouseEnter={(e) => {
                 setHoveredIndex(i);
               }}

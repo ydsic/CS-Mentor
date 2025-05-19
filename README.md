@@ -1,3 +1,5 @@
+[원본 레포 보러가기](https://github.com/ydsic/may_study_project)
+
 # 🎓 CS Mentor
 
 **CS Mentor**는 프론트엔드 신입 개발자들이 **AI 튜터**와 함께 CS(컴퓨터 과학) 면접 질문을 연습할 수 있는 웹 애플리케이션입니다.  

@@ -127,17 +127,6 @@
 - 🔄 사용자 인증 및 로그인 기능 도입
 - 🔄 히스토리별 성취도 분석 대시보드
 
-<<<<<<< HEAD
-## 배포 방식
-
-- Github Actions을 이용하여 main branch에 push를 하면 자동으로 gh-pages branch에 build한 파일이 올라가면서 Github Pages로 배포하는 방식
-
----
-
-## 사용법
-
-- 서버리스 프로젝트라 ChatGPT API 키를 올릴 방법이 없어서 input 태그 안에 직접 API 키를 넣는 방식으로만 동작합니다. 사용을 해보고 싶으신 분들께선 ydsic99@gmail.com 으로 메일 주시면 API Key를 보내드리겠습니다.
-=======
 <br />
 
 ## 배포 방식
@@ -150,4 +139,3 @@
 
 - 서버리스 프로젝트라 `ChatGPT API` 키를 올릴 방법이 없어서 `input` 태그 안에 직접 `API` 키를 넣는 방식으로만 동작합니다.
 - 사용을 해보고 싶으신 분들께선 <ydsic99@gmail.com> 으로 메일 주시면 `API Key`를 보내드리겠습니다.
->>>>>>> 4806c6b53a5ea1fd1f536856b4f3d37371807b2e

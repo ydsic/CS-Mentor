@@ -4,7 +4,7 @@ import { questions_list } from "../src/data/qustions";
 import Title from "./components/title";
 import Question from "./components/qustion";
 import Answer from "./components/answer";
-import { OpenAIApi } from "./api/askAI";
+import { askOpenAI } from "./api/askAi";
 import Feedback from "./components/feedback";
 import NavBar from "./components/nav";
 import { THEMES } from "./data/theme";
@@ -38,7 +38,7 @@ export default function CSMentor() {
     setLoading(true);
     setError("");
     try {
-      const msg = await OpenAIApi(question, input);
+      const msg = await askOpenAI(question, input);
       setFeedback(msg);
     } catch (err) {
       console.error(err);

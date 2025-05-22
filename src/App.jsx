@@ -38,7 +38,7 @@ export default function CSMentor() {
     setLoading(true);
     setError("");
     try {
-      const msg = await askOpenAI(question, input);
+      const msg = await OpenAIApi(question, input);
       setFeedback(msg);
     } catch (err) {
       console.error(err);

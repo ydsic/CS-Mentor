@@ -54,7 +54,7 @@ export default function CSMentor() {
   };
 
   return (
-    <div className={`flex h-screen ${themeClasses}`}>
+    <div className={`relative flex h-screen ${themeClasses}`}>
       <History history={history} setHistory={setHistory} />
 
       <div className="flex-1 px-4 relative">

@@ -1,21 +1,24 @@
-export default function Modal({ history, hoveredIndex, mousePosition }) {
+export default function Modal({ close, isOpen, item }) {
+  if (!isOpen) return null;
+
   return (
-    <>
-      {hoveredIndex !== null && (
-        <div
-          className="absolute z-50 bg-white border border-gray-300 rounded p-3 text-sm shadow-lg max-w-xl"
-          style={{
-            top: mousePosition.y + 10,
-            left: mousePosition.x + 10,
-            position: "fixed",
-          }}
-        >
-          <h3 className="font-semibold text-gray-700 mb-1">질문</h3>
-          <p className="text-gray-800">{history[hoveredIndex].q}</p>
-          <h3 className="font-semibold text-gray-700 mt-2 mb-1">답변</h3>
-          <p className="text-gray-800">{history[hoveredIndex].a}</p>
+    <div className="fixed inset-0 bg-black/80 flex justify-center items-center z-50">
+      <div className="flex flex-col gap-8 bg-white p-6 rounded-xl shadow-xl max-w-md w-full">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-700">질문</h2>
+          <p className="text-md text-gray-800">{item.q}</p>
         </div>
-      )}
-    </>
+        <div>
+          <h2 className="text-xl font-semibold text-gray-700">답변</h2>
+          <p className="text-md text-gray-800">{item.a}</p>
+        </div>
+        <button
+          onClick={close}
+          className="py-2 w-full text-center bg-blue-900 text-white rounded-md cursor-pointer"
+        >
+          닫기
+        </button>
+      </div>
+    </div>
   );
 }

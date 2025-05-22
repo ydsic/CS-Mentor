@@ -1,9 +1,18 @@
 import { useState } from "react";
 import Modal from "./Modal";
+import { useOverlay } from "@toss/use-overlay";
 
 export default function History({ history, setHistory }) {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [hListModal, setHListModal] = useState(false);
+
+  const overlay = useOverlay();
+  const handleHistoryModal = (item) => {
+    setHListModal(!hListModal);
+
+    overlay.open(({ isOpen, close }) => (
+      <Modal close={close} item={item} isOpen={isOpen} />
+    ));
+  };
 
   return (
     <>
@@ -20,28 +29,17 @@ export default function History({ history, setHistory }) {
 
         <ul className="space-y-2">
           {history.map((item, i) => (
-            <li
-              key={i}
-              className="p-2 bg-gray-100 rounded cursor-pointer relative text-black"
-              onMouseEnter={(e) => {
-                setHoveredIndex(i);
-              }}
-              onMouseLeave={() => setHoveredIndex(null)}
-              onMouseMove={(e) => {
-                setMousePosition({ x: e.clientX, y: e.clientY });
-              }}
-            >
-              {item.q.length > 20 ? item.q.slice(0, 20) + "…" : item.q}
+            <li key={i} className="text-black">
+              <button
+                onClick={() => handleHistoryModal(item)}
+                className="w-full p-2 bg-gray-100 rounded text-left text-sm cursor-pointer"
+              >
+                {item.q.length > 20 ? item.q.slice(0, 20) + "…" : item.q}
+              </button>
             </li>
           ))}
         </ul>
       </aside>
-
-      <Modal
-        history={history}
-        hoveredIndex={hoveredIndex}
-        mousePosition={mousePosition}
-      />
     </>
   );
 }

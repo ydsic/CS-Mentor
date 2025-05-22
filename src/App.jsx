@@ -4,7 +4,7 @@ import { questions_list } from "../src/data/qustions";
 import Title from "./components/title";
 import Question from "./components/qustion";
 import Answer from "./components/answer";
-import { askOpenAI } from "./api/askAi";
+import { askOpenAI } from "./api/askAI";
 import Feedback from "./components/feedback";
 import NavBar from "./components/nav";
 import { THEMES } from "./data/theme";

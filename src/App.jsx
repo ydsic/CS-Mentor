@@ -4,14 +4,13 @@ import { questions_list } from "../src/data/qustions";
 import Title from "./components/title";
 import Question from "./components/qustion";
 import Answer from "./components/answer";
-import { OpenAIApi } from "./api/openaiApi";
+import { askOpenAI } from "./api/askAI";
 import Feedback from "./components/feedback";
 import NavBar from "./components/nav";
 import { THEMES } from "./data/theme";
 import History from "./components/sidebar";
 
 export default function CSMentor() {
-  const [apiKey, setApiKey] = useState("");
   const [theme, setTheme] = useState(THEMES[0].name);
   const [questionNum, setQuestionNum] = useState(
     Math.floor(Math.random() * questions_list.length)
@@ -39,7 +38,7 @@ export default function CSMentor() {
     setLoading(true);
     setError("");
     try {
-      const msg = await OpenAIApi(question, input, apiKey);
+      const msg = await askOpenAI(question, input);
       setFeedback(msg);
     } catch (err) {
       console.error(err);
@@ -59,12 +58,7 @@ export default function CSMentor() {
       <History history={history} setHistory={setHistory} />
 
       <div className="flex-1 px-4 relative">
-        <NavBar
-          theme={theme}
-          setTheme={setTheme}
-          apiKey={apiKey}
-          setApiKey={setApiKey}
-        />
+        <NavBar theme={theme} setTheme={setTheme} />
 
         <main className="flex flex-col justify-center items-center gap-4 h-dvh">
           <Title />

@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { questions_list } from "../src/data/qustions";
 import Title from "./components/title";
 import Question from "./components/qustion";
@@ -29,11 +29,18 @@ export default function CSMentor() {
   const themeClasses =
     THEMES.find((t) => t.name === theme)?.classes || THEMES[0].classes;
 
+  useEffect(() => {
+    const saveHistory = localStorage.getItem("csmentor-history");
+    if (saveHistory) setHistory(JSON.parse(saveHistory));
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    setHistory((prev) => [...prev, { q: question, a: input }]);
+    const newHistory = [...history, { q: question, a: input }];
+    setHistory(newHistory);
+    localStorage.setItem("csmentor-history", JSON.stringify(newHistory));
 
     setLoading(true);
     setError("");

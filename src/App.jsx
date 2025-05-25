@@ -1,14 +1,14 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { questions_list } from "../src/data/qustions";
-import Title from "./components/title";
-import Question from "./components/qustion";
-import Answer from "./components/answer";
-import { askOpenAI } from "./api/askAI";
-import Feedback from "./components/feedback";
-import NavBar from "./components/nav";
+import Title from "./_components/title";
+import Question from "./_components/qustion";
+import Answer from "./_components/answer";
+import Feedback from "./_components/feedback";
+import NavBar from "./_components/nav";
+import History from "./_components/sidebar";
 import { THEMES } from "./data/theme";
-import History from "./components/sidebar";
+import { askOpenAI } from "./api/askAI";
 
 export default function CSMentor() {
   const [theme, setTheme] = useState(THEMES[0].name);

@@ -4,6 +4,9 @@ export default function Answer({
   setFeedback,
   handleSubmit,
   loading,
+  setQuestion,
+  setQuestionNum,
+  questions_list,
 }) {
   return (
     <form
@@ -21,15 +24,30 @@ export default function Answer({
         }}
         disabled={loading}
       />
-      <button
-        type="submit"
-        disabled={loading}
-        className={`w-full p-2 rounded-lg text-white font-bold ${
-          loading ? "bg-gray-500" : "bg-[#1e40af] hover:bg-[#1e30af]"
-        }`}
-      >
-        {loading ? "로딩 중…" : "제출하기"}
-      </button>
+      <div className="flex gap-3">
+        <button
+          type="submit"
+          disabled={loading}
+          className={`w-full mt-4 px-4 py-2 rounded-lg text-white font-bold ${
+            loading ? "bg-gray-500" : "bg-[#1e40af] hover:bg-[#1e30af]"
+          }`}
+        >
+          {loading ? "로딩 중…" : "제출하기"}
+        </button>
+
+        <button
+          onClick={() => {
+            const next = Math.floor(Math.random() * questions_list.length);
+            setQuestionNum(next);
+            setQuestion(questions_list[next]);
+            setFeedback("");
+            setInput("");
+          }}
+          className="w-full mt-4 px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition"
+        >
+          다음 질문 →
+        </button>
+      </div>
     </form>
   );
 }

@@ -47,10 +47,6 @@ export default function CSMentor() {
       setLoading(false);
       setInput("");
     }
-
-    const next = Math.floor(Math.random() * questions_list.length);
-    setQuestionNum(next);
-    setQuestion(questions_list[next]);
   };
 
   return (
@@ -68,7 +64,10 @@ export default function CSMentor() {
             setInput={setInput}
             setFeedback={setFeedback}
             handleSubmit={handleSubmit}
+            setQuestion={setQuestion}
+            setQuestionNum={setQuestionNum}
             loading={loading}
+            questions_list={questions_list}
           />
 
           {/* openai api응답 시 나타나는 부분 */}

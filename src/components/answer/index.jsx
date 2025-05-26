@@ -28,9 +28,9 @@ export default function Answer({
       <div className="flex gap-3">
         <button
           type="submit"
-          disabled={loading || isInputDisabled}
+          disabled={isInputDisabled}
           className={`w-full mt-4 px-4 py-2 rounded-lg text-white font-bold ${
-            loading ? "bg-gray-500" : "bg-[#1e40af] hover:bg-[#1e30af]"
+            isInputDisabled ? "bg-gray-500" : "bg-[#1e40af] hover:bg-[#1e30af]"
           }`}
         >
           {loading ? "로딩 중…" : "제출하기"}

@@ -1,10 +1,10 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { questions_list } from "../src/data/qustions";
 import Title from "./components/title";
 import Question from "./components/qustion";
 import Answer from "./components/answer";
-import { askOpenAI } from "./api/askAI";
+import { OpenAIApi } from "./api/openaiApi";
 import Feedback from "./components/feedback";
 import NavBar from "./components/nav";
 import { THEMES } from "./data/theme";
@@ -29,18 +29,11 @@ export default function CSMentor() {
   const themeClasses =
     THEMES.find((t) => t.name === theme)?.classes || THEMES[0].classes;
 
-  useEffect(() => {
-    const saveHistory = localStorage.getItem("csmentor-history");
-    if (saveHistory) setHistory(JSON.parse(saveHistory));
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const newHistory = [...history, { q: question, a: input }];
-    setHistory(newHistory);
-    localStorage.setItem("csmentor-history", JSON.stringify(newHistory));
+    setHistory((prev) => [...prev, { q: question, a: input }]);
 
     setLoading(true);
     setError("");
@@ -61,7 +54,7 @@ export default function CSMentor() {
   };
 
   return (
-    <div className={`relative flex h-screen ${themeClasses}`}>
+    <div className={`flex h-screen ${themeClasses}`}>
       <History history={history} setHistory={setHistory} />
 
       <div className="flex-1 px-4 relative">

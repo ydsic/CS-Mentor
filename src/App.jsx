@@ -15,12 +15,11 @@ export default function CSMentor() {
   const [questionNum, setQuestionNum] = useState(
     Math.floor(Math.random() * questions_list.length)
   );
-
   const [question, setQuestion] = useState(questions_list[questionNum]);
-
   const [input, setInput] = useState("");
-  const [feedback, setFeedback] = useState("");
+  const [isInputDisabled, setIsInputDisabled] = useState(false);
 
+  const [feedback, setFeedback] = useState("");
   const [history, setHistory] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -40,12 +39,12 @@ export default function CSMentor() {
     try {
       const msg = await OpenAIApi(question, input);
       setFeedback(msg);
+      setIsInputDisabled(true);
     } catch (err) {
       console.error(err);
       setError("피드백을 불러오는 중 오류가 발생했습니다.");
     } finally {
       setLoading(false);
-      setInput("");
     }
   };
 
@@ -68,6 +67,8 @@ export default function CSMentor() {
             setQuestionNum={setQuestionNum}
             loading={loading}
             questions_list={questions_list}
+            isInputDisabled={isInputDisabled}
+            setIsInputDisabled={setIsInputDisabled}
           />
 
           {/* openai api응답 시 나타나는 부분 */}

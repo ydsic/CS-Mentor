@@ -7,6 +7,7 @@ export default function Answer({
   setQuestion,
   setQuestionNum,
   questions_list,
+  isInputDisabled,
 }) {
   return (
     <form
@@ -22,12 +23,12 @@ export default function Answer({
           setInput(e.target.value);
           setFeedback("");
         }}
-        disabled={loading}
+        disabled={loading || isInputDisabled}
       />
       <div className="flex gap-3">
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || isInputDisabled}
           className={`w-full mt-4 px-4 py-2 rounded-lg text-white font-bold ${
             loading ? "bg-gray-500" : "bg-[#1e40af] hover:bg-[#1e30af]"
           }`}

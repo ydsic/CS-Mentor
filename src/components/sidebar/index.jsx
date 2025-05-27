@@ -20,7 +20,10 @@ export default function History({ history, setHistory }) {
         <div className="flex items-end justify-between font-semibold mb-6 pb-2 border-b border-[#1e40af]">
           <h2 className="font-bold text-2xl text-[#1e40af]">History</h2>
           <button
-            onClick={() => setHistory([])}
+            onClick={() => {
+              setHistory([]);
+              localStorage.removeItem("csmentor-history");
+            }}
             className="text-sm text-red-500 hover:underline cursor-pointer"
           >
             Clear All

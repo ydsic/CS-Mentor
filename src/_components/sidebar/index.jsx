@@ -32,13 +32,17 @@ export default function History({ history, setHistory }) {
 
         <ul className="space-y-2">
           {history.map((item, i) => (
-            <li key={i} className="text-black">
+            <li
+              key={i}
+              className="flex justify-between p-2 bg-gray-100 rounded text-sm cursor-pointer text-black"
+            >
               <button
                 onClick={() => handleHistoryModal(item)}
-                className="w-full p-2 bg-gray-100 rounded text-left text-sm cursor-pointer"
+                className="flex-1 py-2 overflow-hidden text-ellipsis whitespace-nowrap"
               >
                 {item.q.length > 20 ? item.q.slice(0, 20) + "…" : item.q}
               </button>
+              <button>❌</button>
             </li>
           ))}
         </ul>

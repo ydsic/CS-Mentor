@@ -12,7 +12,13 @@ import History from "./_components/sidebar";
 import LoadingComment from "./_components/answer/loading";
 
 export default function CSMentor() {
-  const [theme, setTheme] = useState(THEMES[0].name);
+  const getInitialTheme = () => {
+    const savedTheme = localStorage.getItem("csmentor-theme");
+    const found = THEMES.find((t) => t.name === savedTheme);
+    return found ? found.name : THEMES[0].name;
+  };
+  const [theme, setTheme] = useState(getInitialTheme());
+
   const [questionNum, setQuestionNum] = useState(
     Math.floor(Math.random() * questions_list.length)
   );
@@ -33,6 +39,10 @@ export default function CSMentor() {
     const saveHistory = localStorage.getItem("csmentor-history");
     if (saveHistory) setHistory(JSON.parse(saveHistory));
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("csmentor-theme", theme);
+  }, [theme]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

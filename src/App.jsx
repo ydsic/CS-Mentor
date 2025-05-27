@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { questions_list } from "../src/data/qustions";
 import Title from "./_components/title";
 import Question from "./_components/qustion";
@@ -29,11 +29,18 @@ export default function CSMentor() {
   const themeClasses =
     THEMES.find((t) => t.name === theme)?.classes || THEMES[0].classes;
 
+  useEffect(() => {
+    const saveHistory = localStorage.getItem("csmentor-history");
+    if (saveHistory) setHistory(JSON.parse(saveHistory));
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    setHistory((prev) => [...prev, { q: question, a: input }]);
+    const newHistory = [...history, { question, a: input }];
+    setHistory(newHistory);
+    localStorage.setItem("csmentor-history", JSON.stringify(newHistory));
 
     setLoading(true);
     setError("");
@@ -46,11 +53,12 @@ export default function CSMentor() {
       setError("피드백을 불러오는 중 오류가 발생했습니다.");
     } finally {
       setLoading(false);
+      setInput("");
     }
   };
 
   return (
-    <div className={`flex h-screen ${themeClasses}`}>
+    <div className={`relative flex h-screen ${themeClasses}`}>
       <History history={history} setHistory={setHistory} />
 
       <div className="flex-1 px-4 relative">

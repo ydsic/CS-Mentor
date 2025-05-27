@@ -1,18 +1,51 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import { useOverlay } from "@toss/use-overlay";
+import ConfirmModal from "../ConfirmModal";
 
 export default function History({ history, setHistory }) {
-  const [hListModal, setHListModal] = useState(false);
-
   const overlay = useOverlay();
   const handleHistoryModal = (item) => {
-    setHListModal(!hListModal);
-
     overlay.open(({ isOpen, close }) => (
       <Modal close={close} item={item} isOpen={isOpen} />
     ));
   };
+
+  const handleClearConfirm = () => {
+    overlay.open(({ isOpen, close }) => (
+      <ConfirmModal
+        isOpen={isOpen}
+        close={close}
+        message="모든 히스토리를 삭제하시겠습니까?"
+        confirmText="삭제"
+        cancelText="취소"
+        onConfirm={() => {
+          setHistory([]);
+          localStorage.removeItem("csmentor-history");
+        }}
+      />
+    ));
+  };
+
+  const handleDeleteItem = (index) => {
+    overlay.open(({ isOpen, close }) => (
+      <ConfirmModal
+        isOpen={isOpen}
+        close={close}
+        message="이 항목을 삭제하시겠습니까?"
+        confirmText="삭제"
+        cancelText="취소"
+        onConfirm={() => {
+          const newHistory = [...history];
+          newHistory.splice(index, 1);
+          setHistory(newHistory);
+          localStorage.setItem("csmentor-history", JSON.stringify(newHistory));
+        }}
+      />
+    ));
+  };
+
+  console.log("history", history);
 
   return (
     <>
@@ -20,11 +53,13 @@ export default function History({ history, setHistory }) {
         <div className="flex items-end justify-between font-semibold mb-6 pb-2 border-b border-[#1e40af]">
           <h2 className="font-bold text-2xl text-[#1e40af]">History</h2>
           <button
-            onClick={() => {
-              setHistory([]);
-              localStorage.removeItem("csmentor-history");
-            }}
-            className="text-sm text-red-500 hover:underline cursor-pointer"
+            onClick={handleClearConfirm}
+            className={`text-sm hover:underline transition-opacity ${
+              history.length === 0
+                ? "text-gray-400 cursor-not-allowed opacity-50"
+                : "text-red-500 cursor-pointer"
+            }`}
+            disabled={history.length === 0}
           >
             Clear All
           </button>
@@ -34,15 +69,22 @@ export default function History({ history, setHistory }) {
           {history.map((item, i) => (
             <li
               key={i}
-              className="flex justify-between p-2 bg-gray-100 rounded text-sm cursor-pointer text-black"
+              className="flex justify-between p-2 bg-gray-100 rounded text-sm text-black"
             >
               <button
                 onClick={() => handleHistoryModal(item)}
-                className="flex-1 py-2 overflow-hidden text-ellipsis whitespace-nowrap"
+                className="flex-1 py-2 overflow-hidden text-ellipsis whitespace-nowrap text-left cursor-pointer"
               >
-                {item.q.length > 20 ? item.q.slice(0, 20) + "…" : item.q}
+                {item.question.length > 20
+                  ? item.question.slice(0, 20) + "…"
+                  : item.question}
               </button>
-              <button>❌</button>
+              <button
+                onClick={() => handleDeleteItem(i)}
+                className="cursor-pointer"
+              >
+                ❌
+              </button>
             </li>
           ))}
         </ul>

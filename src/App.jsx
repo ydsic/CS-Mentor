@@ -1,15 +1,15 @@
 import "./App.css";
 import { useState } from "react";
 import { questions_list } from "../src/data/qustions";
-import Title from "./components/title";
-import Question from "./components/qustion";
-import Answer from "./components/answer";
+import Title from "./_components/title";
+import Question from "./_components/qustion";
+import Answer from "./_components/answer";
 import { OpenAIApi } from "./api/openaiApi";
-import Feedback from "./components/feedback";
-import NavBar from "./components/nav";
+import Feedback from "./_components/feedback";
+import NavBar from "./_components/nav";
 import { THEMES } from "./data/theme";
-import History from "./components/sidebar";
-import LoadingComment from "./components/answer/loading";
+import History from "./_components/sidebar";
+import LoadingComment from "./_components/answer/loading";
 
 export default function CSMentor() {
   const [theme, setTheme] = useState(THEMES[0].name);

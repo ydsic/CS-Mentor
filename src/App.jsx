@@ -9,6 +9,7 @@ import Feedback from "./components/feedback";
 import NavBar from "./components/nav";
 import { THEMES } from "./data/theme";
 import History from "./components/sidebar";
+import LoadingComment from "./components/answer/loading";
 
 export default function CSMentor() {
   const [theme, setTheme] = useState(THEMES[0].name);
@@ -75,6 +76,7 @@ export default function CSMentor() {
           {/* 피드백이 표시될 공간을 미리 마련하여 피드백이 표시될 시 UI위치가 달라지는 것을 방지 */}
           <div className="flex flex-col max-w-[80%] overflow-y-scroll ">
             {feedback && <Feedback feedback={feedback} />}
+            {loading && <LoadingComment loading={loading} />}
             {error && <p className="text-red-500">{error}</p>}
           </div>
         </main>

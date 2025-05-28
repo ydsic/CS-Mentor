@@ -1,6 +1,6 @@
+import { useInputStore } from "../../store/inputStore";
+
 export default function Answer({
-  input,
-  setInput,
   setFeedback,
   handleSubmit,
   loading,
@@ -10,6 +10,8 @@ export default function Answer({
   isInputDisabled,
   setIsInputDisabled,
 }) {
+  const { input, setInput } = useInputStore();
+
   return (
     <form
       onSubmit={handleSubmit}

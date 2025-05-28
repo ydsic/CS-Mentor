@@ -6,8 +6,6 @@ import Title from "../question/Title";
 
 export default function MainLayout({
   question,
-  input,
-  setInput,
   handleSubmit,
   setQuestion,
   setQuestionNum,
@@ -19,13 +17,12 @@ export default function MainLayout({
   questions_list,
   setFeedback,
 }) {
+  console.log("MainLayout 리렌더링");
   return (
     <main className="flex flex-col justify-center items-center gap-4 h-dvh">
       <Title />
       <Question question={question} />
       <Answer
-        input={input}
-        setInput={setInput}
         setFeedback={setFeedback}
         handleSubmit={handleSubmit}
         setQuestion={setQuestion}

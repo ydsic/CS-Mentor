@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { getHistoryStorage } from "../utils/storage";
 import { OpenAIApi } from "../api/openaiApi";
+import { useInputStore } from "../store/inputStore";
 
 export const useFeedbackHandler = (question) => {
-  const [input, setInput] = useState("");
+  const { input, setInput } = useInputStore();
   const [feedback, setFeedback] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -39,8 +40,6 @@ export const useFeedbackHandler = (question) => {
   };
 
   return {
-    input,
-    setInput,
     feedback,
     loading,
     error,

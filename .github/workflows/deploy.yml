@@ -18,7 +18,10 @@ jobs:
           personal_token: ${{ secrets.ACTION_TOKEN }}
           publish_dir: ./dist
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> e85a9346be7db86786126a36c965cae48891feab
 
   notify:
     needs: deploy
@@ -35,4 +38,7 @@ jobs:
             🙋‍♂️ 배포자: `${{ github.actor }}`
             🌿 branch: `${{ github.ref }}`
             💬 message: `${{ github.event.head_commit.message }}`
+<<<<<<< HEAD
 >>>>>>> 6a260db (fix: Discord WebHook yml 파일 수정)
+=======
+>>>>>>> e85a9346be7db86786126a36c965cae48891feab

@@ -21,8 +21,6 @@ export default function App() {
   const [question, setQuestion] = useState(questions_list[questionNum]);
 
   const {
-    input,
-    setInput,
     feedback,
     loading,
     error,
@@ -49,8 +47,6 @@ export default function App() {
         <NavBar theme={theme} setTheme={setTheme} />
         <MainLayout
           question={question}
-          input={input}
-          setInput={setInput}
           handleSubmit={handleSubmit}
           setQuestion={setQuestion}
           setQuestionNum={setQuestionNum}

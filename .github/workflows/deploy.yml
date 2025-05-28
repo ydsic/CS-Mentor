@@ -29,3 +29,13 @@ jobs:
         with:
           personal_token: ${{ secrets.ACTION_TOKEN }}
           publish_dir: ./dist
+
+      - name: Notify Discord
+        uses: Ilshidur/action-discord@master
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            🚀 GitHub Pages 배포 완료!
+            ✅ `${{ github.repository }}`
+            🧑‍💻 by `${{ github.actor }}`
+            🌐 배포 브랜치: `main`

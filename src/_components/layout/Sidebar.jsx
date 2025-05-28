@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Modal from "./Modal";
+import Modal from "../BasicModal";
 import { useOverlay } from "@toss/use-overlay";
 import ConfirmModal from "../ConfirmModal";
 
-export default function History({ history, setHistory }) {
+export default function Sidebar({ history, setHistory }) {
   const overlay = useOverlay();
   const handleHistoryModal = (item) => {
     overlay.open(({ isOpen, close }) => (

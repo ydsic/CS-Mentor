@@ -7,10 +7,11 @@ import NavBar from "./_components/layout/NavBar";
 import History from "./_components/layout/Sidebar";
 import MainLayout from "./_components/layout/MainLayout";
 import { useFeedbackHandler } from "./hooks/useFeedbackHandler";
+import { getThemeStorage, setThemeStorage } from "./utils/storage";
 
 export default function App() {
   const getInitialTheme = () => {
-    const savedTheme = localStorage.getItem("csmentor-theme");
+    const savedTheme = getThemeStorage();
     const found = THEMES.find((t) => t.name === savedTheme);
     return found ? found.name : THEMES[0].name;
   };
@@ -38,7 +39,7 @@ export default function App() {
     THEMES.find((t) => t.name === theme)?.classes || THEMES[0].classes;
 
   useEffect(() => {
-    localStorage.setItem("csmentor-theme", theme);
+    setThemeStorage(theme);
   }, [theme]);
 
   return (

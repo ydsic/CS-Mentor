@@ -1,6 +1,6 @@
 import React from "react";
 
-const HistoryItem = ({ item, index, onOpen, onDelete }) => {
+const HistoryItem = ({ item, i, onOpen, onDelete }) => {
   return (
     <li
       key={i}

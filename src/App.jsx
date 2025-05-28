@@ -1,17 +1,17 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { questions_list } from "../src/data/qustions";
-import Title from "./_components/title";
-import Question from "./_components/qustion";
-import Answer from "./_components/answer";
+import Title from "./_components/question/Title";
+import Question from "./_components/question/Question";
+import Answer from "./_components/question/AnswerForm";
 import { OpenAIApi } from "./api/openaiApi";
-import Feedback from "./_components/feedback";
-import NavBar from "./_components/nav";
+import Feedback from "./_components/layout/Feedback";
+import NavBar from "./_components/layout/NavBar";
 import { THEMES } from "./data/theme";
-import History from "./_components/sidebar";
-import LoadingComment from "./_components/answer/loading";
+import History from "./_components/layout/Sidebar";
+import LoadingComment from "./_components/answer/Loading";
 
-export default function CSMentor() {
+export default function App() {
   const getInitialTheme = () => {
     const savedTheme = localStorage.getItem("csmentor-theme");
     const found = THEMES.find((t) => t.name === savedTheme);

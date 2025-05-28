@@ -1,0 +1,17 @@
+name: Discord Notification
+
+on:
+  push:
+
+jobs:
+  discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send push notification to Discord
+        uses: Ilshidur/action-discord@master
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            ✅ **새 푸시 알림**
+            📦 브랜치: `${{ github.ref }}`
+            💬 메시지: `${{ github.event.head_commit.message }}`

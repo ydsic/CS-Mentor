@@ -1,19 +1,27 @@
-import Modal from "../BasicModal";
+import BasicModal from "../BasicModal";
 import { useOverlay } from "@toss/use-overlay";
 import ConfirmModal from "../ConfirmModal";
-import React from "react";
+import React, { useCallback } from "react";
+import HistoryItem from "../HistoryItem";
+import { useHistoryStore } from "../../store/historyStore";
 
-export default function Sidebar({ history, setHistory }) {
+function Sidebar() {
   console.log("Sidebar 리렌더링");
 
   const overlay = useOverlay();
-  const handleHistoryModal = (item) => {
-    overlay.open(({ isOpen, close }) => (
-      <Modal close={close} item={item} isOpen={isOpen} />
-    ));
-  };
+  const { history, setHistory, clearHistory, deleteHistoryItem } =
+    useHistoryStore();
 
-  const handleClearConfirm = () => {
+  const handleHistoryModal = useCallback(
+    (item) => {
+      overlay.open(({ isOpen, close }) => (
+        <BasicModal close={close} item={item} isOpen={isOpen} />
+      ));
+    },
+    [overlay]
+  );
+
+  const handleClearConfirm = useCallback(() => {
     overlay.open(({ isOpen, close }) => (
       <ConfirmModal
         isOpen={isOpen}
@@ -21,31 +29,28 @@ export default function Sidebar({ history, setHistory }) {
         message="모든 히스토리를 삭제하시겠습니까?"
         confirmText="삭제"
         cancelText="취소"
-        onConfirm={() => {
-          setHistory([]);
-          localStorage.removeItem("csmentor-history");
-        }}
+        onConfirm={clearHistory}
       />
     ));
-  };
+  }, [overlay, clearHistory]);
 
-  const handleDeleteItem = (index) => {
-    overlay.open(({ isOpen, close }) => (
-      <ConfirmModal
-        isOpen={isOpen}
-        close={close}
-        message="이 항목을 삭제하시겠습니까?"
-        confirmText="삭제"
-        cancelText="취소"
-        onConfirm={() => {
-          const newHistory = [...history];
-          newHistory.splice(index, 1);
-          setHistory(newHistory);
-          localStorage.setItem("csmentor-history", JSON.stringify(newHistory));
-        }}
-      />
-    ));
-  };
+  const handleDeleteItem = useCallback(
+    (index) => {
+      overlay.open(({ isOpen, close }) => (
+        <ConfirmModal
+          isOpen={isOpen}
+          close={close}
+          message="이 항목을 삭제하시겠습니까?"
+          confirmText="삭제"
+          cancelText="취소"
+          onConfirm={() => deleteHistoryItem(index)}
+        />
+      ));
+    },
+    [overlay, deleteHistoryItem]
+  );
+
+  console.log("history", history);
 
   return (
     <>
@@ -67,28 +72,17 @@ export default function Sidebar({ history, setHistory }) {
 
         <ul className="space-y-2">
           {history.map((item, i) => (
-            <li
+            <HistoryItem
               key={i}
-              className="flex justify-between p-2 bg-gray-100 rounded text-sm text-black"
-            >
-              <button
-                onClick={() => handleHistoryModal(item)}
-                className="flex-1 py-2 overflow-hidden text-ellipsis whitespace-nowrap text-left cursor-pointer"
-              >
-                {item.question.length > 20
-                  ? item.question.slice(0, 20) + "…"
-                  : item.question}
-              </button>
-              <button
-                onClick={() => handleDeleteItem(i)}
-                className="cursor-pointer"
-              >
-                ❌
-              </button>
-            </li>
+              item={item}
+              index={i}
+              onOpen={handleHistoryModal}
+              onDelete={handleDeleteItem}
+            />
           ))}
         </ul>
       </aside>
     </>
   );
 }
+export default React.memo(Sidebar);

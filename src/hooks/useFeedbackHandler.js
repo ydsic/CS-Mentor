@@ -11,11 +11,6 @@ export const useFeedbackHandler = (question) => {
   const [history, setHistory] = useState([]);
   const [isInputDisabled, setIsInputDisabled] = useState(false);
 
-  useEffect(() => {
-    const saveHistory = getHistoryStorage();
-    if (saveHistory) setHistory(JSON.parse(saveHistory));
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;

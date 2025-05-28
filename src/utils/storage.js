@@ -1,4 +1,4 @@
-import { STORAGE_KEYS } from "../contants/storageKeys";
+import { STORAGE_KEYS } from "../constants/storageKeys";
 
 export const getHistoryStorage = () => {
   JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || "[]");

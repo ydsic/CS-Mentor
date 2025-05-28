@@ -27,7 +27,7 @@
 - **상세 피드백 제공**
   - 틀린 부분에 대한 설명과 보충 학습 자료 추천
 - **다크 모드 지원**
-  - 사용자 환경에 따라 다크/라이트 모드 전환 가능
+  - 사용자 환경에 따라 다중컬러 모드 전환 가능
 - **답변 히스토리 저장 기능**
   - 이전에 제출한 질문 및 피드백을 기록하여 복습 가능
 
@@ -47,6 +47,8 @@
 
 ## 📁 프로젝트 구조
 
+### before
+
 ```
 📦may_study_project
  ┣ 📂public
@@ -54,9 +56,7 @@
  ┣ 📂src
  ┃ ┣ 📂api
  ┃ ┃ ┗ 📜openaiApi.jsx          # OpenAI GPT API 호출 함수
- ┃ ┣ 📂assets
- ┃ ┃ ┗ 📜react.svg              # 이미지/아이콘 등 정적 자산
- ┃ ┣ 📂components
+ ┃ ┣ 📂_components
  ┃ ┃ ┣ 📂answer
  ┃ ┃ ┃ ┗ 📜index.jsx           # 사용자 답변 입력 폼
  ┃ ┃ ┣ 📂feedback
@@ -74,9 +74,48 @@
  ┃ ┃ ┣ 📜qustions.js           # 질문 데이터 리스트
  ┃ ┃ ┗ 📜theme.js              # 다크모드 관련 설정
  ┃ ┣ 📜App.jsx                 # 라우팅 및 전체 앱 구성
- ┃ ┣ 📜Test.jsx                # 테스트용 임시 컴포넌트
  ┃ ┣ 📜App.css / index.css     # 전역 스타일
  ┃ ┗ 📜main.jsx                # 앱 엔트리 포인트
+```
+
+### after
+
+```
+src
+ ┣ _components
+ ┃ ┣ layout
+ ┃ ┃ ┣ MainLayout.jsx
+ ┃ ┃ ┣ NavBar.jsx
+ ┃ ┃ ┗ Sidebar.jsx
+ ┃ ┣ question
+ ┃ ┃ ┣ AnswerForm.jsx
+ ┃ ┃ ┣ Feedback.jsx
+ ┃ ┃ ┣ Loading.jsx
+ ┃ ┃ ┣ Question.jsx
+ ┃ ┃ ┗ Title.jsx
+ ┃ ┣ BasicModal.jsx
+ ┃ ┗ ConfirmModal.jsx
+ ┣ api
+ ┃ ┣ openaiApi.jsx
+ ┃ ┗ supabaseApi.jsx
+ ┣ assets
+ ┃ ┗ react.svg
+ ┣ constants
+ ┃ ┗ storageKeys.js
+ ┣ data
+ ┃ ┣ qustions.js
+ ┃ ┗ theme.js
+ ┣ hooks
+ ┃ ┗ useFeedbackHandler.js
+ ┣ store
+ ┃ ┗ inputStore.js
+ ┣ utils
+ ┃ ┗ storage.js
+ ┣ App.css
+ ┣ App.jsx
+ ┣ Test.jsx
+ ┣ index.css
+ ┗ main.jsx
 ```
 
 <br/>

@@ -1,9 +1,9 @@
-import { useState } from "react";
 import Modal from "../BasicModal";
 import { useOverlay } from "@toss/use-overlay";
 import ConfirmModal from "../ConfirmModal";
+import React from "react";
 
-export default function Sidebar({ history, setHistory }) {
+export default React.memo(function Sidebar({ history, setHistory }) {
   const overlay = useOverlay();
   const handleHistoryModal = (item) => {
     overlay.open(({ isOpen, close }) => (
@@ -46,6 +46,7 @@ export default function Sidebar({ history, setHistory }) {
   };
 
   console.log("history", history);
+  console.log("🔁 Sidebar 렌더링");
 
   return (
     <>
@@ -91,4 +92,4 @@ export default function Sidebar({ history, setHistory }) {
       </aside>
     </>
   );
-}
+});

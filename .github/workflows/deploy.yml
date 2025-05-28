@@ -2,45 +2,34 @@ name: Deploy React App to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build the project
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with: { node-version: "18" }
+      - run: npm install
+      - run: npm run build
+      - uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.ACTION_TOKEN }}
           publish_dir: ./dist
 
   notify:
-    name: Notify Discord
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Send message to Discord
+      - name: Send Discord notification
         uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          message: |
-            🚀 **GitHub Pages 배포 완료!**
-            🔗 레포: `${{ github.repository }}`
-            🌿 브랜치: `${{ github.ref }}`
-            🙋‍♂️ 푸시한 사람: `${{ github.actor }}`
+          args: |
+            🚀 **GitHub Push!**
+            🔗 `${{ github.repository }}`
+            🙋‍♂️ 배포자: `${{ github.actor }}`
+            🌿 branch: `${{ github.ref }}`
+            💬 message: `${{ github.event.head_commit.message }}`

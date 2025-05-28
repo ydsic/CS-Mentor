@@ -30,12 +30,17 @@ jobs:
           personal_token: ${{ secrets.ACTION_TOKEN }}
           publish_dir: ./dist
 
-      - name: Notify Discord
+  notify:
+    name: Notify Discord
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message to Discord
         uses: Ilshidur/action-discord@master
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           message: |
-            🚀 GitHub Pages 배포 완료!
-            ✅ `${{ github.repository }}`
-            🧑‍💻 by `${{ github.actor }}`
-            🌐 배포 브랜치: `main`
+            🚀 **GitHub Pages 배포 완료!**
+            🔗 레포: `${{ github.repository }}`
+            🌿 브랜치: `${{ github.ref }}`
+            🙋‍♂️ 푸시한 사람: `${{ github.actor }}`

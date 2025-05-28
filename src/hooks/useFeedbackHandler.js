@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getHistoryStorage } from "../utils/storage";
+import { OpenAIApi } from "../api/openaiApi";
 
 export const useFeedbackHandler = (question) => {
   const [input, setInput] = useState("");

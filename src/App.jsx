@@ -1,7 +1,6 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { questions_list } from "../src/data/qustions";
-import { OpenAIApi } from "./api/openaiApi";
 import { THEMES } from "./data/theme";
 import NavBar from "./_components/layout/NavBar";
 import History from "./_components/layout/Sidebar";

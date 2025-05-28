@@ -2,8 +2,9 @@ import Modal from "../BasicModal";
 import { useOverlay } from "@toss/use-overlay";
 import ConfirmModal from "../ConfirmModal";
 import React from "react";
+import HistoryItem from "../HistoryItem";
 
-export default function Sidebar({ history, setHistory }) {
+function Sidebar({ history, setHistory }) {
   console.log("Sidebar 리렌더링");
 
   const overlay = useOverlay();
@@ -67,28 +68,17 @@ export default function Sidebar({ history, setHistory }) {
 
         <ul className="space-y-2">
           {history.map((item, i) => (
-            <li
+            <HistoryItem
               key={i}
-              className="flex justify-between p-2 bg-gray-100 rounded text-sm text-black"
-            >
-              <button
-                onClick={() => handleHistoryModal(item)}
-                className="flex-1 py-2 overflow-hidden text-ellipsis whitespace-nowrap text-left cursor-pointer"
-              >
-                {item.question.length > 20
-                  ? item.question.slice(0, 20) + "…"
-                  : item.question}
-              </button>
-              <button
-                onClick={() => handleDeleteItem(i)}
-                className="cursor-pointer"
-              >
-                ❌
-              </button>
-            </li>
+              item={item}
+              index={i}
+              onOpen={handleHistoryModal}
+              onDelete={handleDeleteItem}
+            />
           ))}
         </ul>
       </aside>
     </>
   );
 }
+export default React.memo(Sidebar);

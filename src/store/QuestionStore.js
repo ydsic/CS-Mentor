@@ -11,4 +11,12 @@ export const useQuestionStore = create((set) => ({
       question: state.questions_list[num],
     })),
   setQuestion: (q) => set({ question: q }),
+
+  setRandomQuestion: () => {
+    const num = Math.floor(Math.random() * questions_list.length);
+    set({
+      questionNum: num,
+      question: questions_list[num],
+    });
+  },
 }));

@@ -45,6 +45,7 @@ export default function App() {
 
       <div className="flex-1 px-4 relative">
         <NavBar theme={theme} setTheme={setTheme} />
+
         <MainLayout
           question={question}
           handleSubmit={handleSubmit}

@@ -24,8 +24,6 @@ export default function App() {
     feedback,
     loading,
     error,
-    history,
-    setHistory,
     handleSubmit,
     isInputDisabled,
     setIsInputDisabled,
@@ -41,7 +39,7 @@ export default function App() {
 
   return (
     <div className={`relative flex h-screen ${themeClasses}`}>
-      <History history={history} setHistory={setHistory} />
+      <History />
 
       <div className="flex-1 px-4 relative">
         <NavBar theme={theme} setTheme={setTheme} />

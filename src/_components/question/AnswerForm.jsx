@@ -1,3 +1,4 @@
+import { useQuestionStore } from "../../store/QuestionStore";
 import { useInputStore } from "../../store/inputStore";
 
 export default function Answer({
@@ -11,6 +12,7 @@ export default function Answer({
   setIsInputDisabled,
 }) {
   const { input, setInput } = useInputStore();
+  const { setRandomQuestion } = useQuestionStore();
 
   return (
     <form
@@ -41,9 +43,7 @@ export default function Answer({
 
         <button
           onClick={() => {
-            const next = Math.floor(Math.random() * questions_list.length);
-            setQuestionNum(next);
-            setQuestion(questions_list[next]);
+            setRandomQuestion();
             setFeedback("");
             setInput("");
             setIsInputDisabled(false);

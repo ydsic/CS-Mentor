@@ -9,8 +9,9 @@ function Sidebar() {
   console.log("Sidebar 리렌더링");
 
   const overlay = useOverlay();
-  const { history, setHistory, clearHistory, deleteHistoryItem } =
-    useHistoryStore();
+  const history = useHistoryStore((state) => state.history);
+  const clearHistory = useHistoryStore((state) => state.clearHistory);
+  const deleteHistoryItem = useHistoryStore((state) => state.deleteHistoryItem);
 
   const handleHistoryModal = useCallback(
     (item) => {
@@ -49,8 +50,6 @@ function Sidebar() {
     },
     [overlay, deleteHistoryItem]
   );
-
-  console.log("history", history);
 
   return (
     <>

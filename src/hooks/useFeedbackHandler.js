@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getHistoryStorage } from "../utils/storage";
 import { OpenAIApi } from "../api/openaiApi";
 import { useInputStore } from "../store/inputStore";
+import { useHistoryStore } from "../store/historyStore";
 
 export const useFeedbackHandler = (question) => {
   const { input, setInput } = useInputStore();
@@ -10,6 +11,8 @@ export const useFeedbackHandler = (question) => {
   const [error, setError] = useState("");
   const [history, setHistory] = useState([]);
   const [isInputDisabled, setIsInputDisabled] = useState(false);
+
+  const addHistoryItem = useHistoryStore((state) => state.addHistoryItem);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +26,9 @@ export const useFeedbackHandler = (question) => {
     setError("");
     try {
       const msg = await OpenAIApi(question, input);
+      console.log("✅ addHistoryItem 호출:", question);
+
+      addHistoryItem({ question, a: input });
       setFeedback(msg);
       setIsInputDisabled(true);
     } catch (err) {
